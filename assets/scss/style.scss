@@ -60,11 +60,19 @@ $screen-bg: #008081;
 	}
 }
 
+#welcome {
+	top: 150px;
+	left: 30%;
+}
+
 .window {
 	@include outset-border;
 	background: $base-gray;
+	position: absolute;
 	display: flex;
 	flex-direction: column;
+	width: 500px;
+	height: 190px;
 
 	.header {
 		background: $dark-gray;
@@ -94,6 +102,9 @@ $screen-bg: #008081;
 }
 
 body {
+	overflow: hidden;
+	user-select: none;
+
 	#screen {
 		padding: 2em 1.5em;
 		background: $screen-bg;
@@ -104,6 +115,7 @@ body {
 	}
 
 	#taskbar {
+		z-index: 100;
 		height: 40px;
 		border: 3px solid $light-gray;
 		border-style: outset;
