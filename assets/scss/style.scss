@@ -53,10 +53,14 @@ $screen-bg: #008081;
 	@include outset-border;
 	background: $base-gray;
 	position: absolute;
-	display: flex;
+	display: none;
 	flex-direction: column;
 	width: 500px;
 	height: 190px;
+
+	&.active {
+		display: flex;
+	}
 
 	.header {
 		background: $dark-gray;

@@ -1,17 +1,22 @@
 const time = document.querySelector('#time');
 const apps = document.querySelectorAll('.app');
-const welcome = document.querySelector('#welcome');
+const appsWindow = document.querySelectorAll('.window');
 
 setTime();
 positionApps();
-dragElement(welcome);
 
 setInterval(function () {
 	setTime();
 }, 60 * 1000);
 
 apps.forEach(function (app) {
-	app.addEventListener('click', openApp);
+	app.addEventListener('dblclick', openApp);
+});
+
+appsWindow.forEach(function (appWindow) {
+	dragElement(appWindow);
+
+	appWindow.querySelector('button').addEventListener('click', closeWindow);
 });
 
 function setTime() {
@@ -27,8 +32,8 @@ function dragElement(elmnt) {
 		pos2 = 0,
 		pos3 = 0,
 		pos4 = 0;
-	if (document.getElementById(elmnt.id + '-header')) {
-		document.getElementById(elmnt.id + '-header').onmousedown = dragMouseDown;
+	if (elmnt.querySelector('.header')) {
+		elmnt.querySelector('.header').onmousedown = dragMouseDown;
 	} else {
 		elmnt.onmousedown = dragMouseDown;
 	}
@@ -60,8 +65,9 @@ function dragElement(elmnt) {
 }
 
 function openApp(e) {
-	let target = e.target.localName != 'div' ? e.target.parentElement : e.target;
-	target.style.position = 'absolute';
+	let app = e.target.localName != 'div' ? e.target.parentElement : e.target;
+	let target = app.getAttribute('data-target');
+	document.getElementById(target).classList.add('active');
 }
 
 function positionApps() {
@@ -72,4 +78,8 @@ function positionApps() {
 		top += 105;
 		dragElement(app);
 	});
+}
+
+function closeWindow(e) {
+	e.target.closest('.window').classList.remove('active');
 }

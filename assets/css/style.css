@@ -50,15 +50,19 @@
   border-bottom-color: #3b3b3b;
   background: #c0c0c0;
   position: absolute;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
   width: 500px;
   height: 190px;
+}
+
+.window.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .window .header {
