@@ -1,9 +1,18 @@
 const time = document.querySelector('#time');
+const apps = document.querySelectorAll('.app');
+const welcome = document.querySelector('#welcome');
 
 setTime();
+positionApps();
+dragElement(welcome);
+
 setInterval(function () {
 	setTime();
 }, 60 * 1000);
+
+apps.forEach(function (app) {
+	app.addEventListener('click', openApp);
+});
 
 function setTime() {
 	let timeStr = new Date();
@@ -12,8 +21,6 @@ function setTime() {
 		minute: '2-digit',
 	});
 }
-
-dragElement(document.getElementById('welcome'));
 
 function dragElement(elmnt) {
 	var pos1 = 0,
@@ -50,4 +57,19 @@ function dragElement(elmnt) {
 		document.onmouseup = null;
 		document.onmousemove = null;
 	}
+}
+
+function openApp(e) {
+	let target = e.target.localName != 'div' ? e.target.parentElement : e.target;
+	target.style.position = 'absolute';
+}
+
+function positionApps() {
+	let top = 24;
+	console.log(apps[0]);
+	apps.forEach(function (app) {
+		app.style.top = `${top}px`;
+		top += 105;
+		dragElement(app);
+	});
 }

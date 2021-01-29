@@ -1,7 +1,4 @@
-@font-face {
-	font-family: '95font';
-	src: url('/assets/sans.ttf');
-}
+@import './media.scss';
 
 $base-gray: #c0c0c0;
 $light-gray: #f4ffff;
@@ -9,39 +6,16 @@ $dark-gray: #808080;
 $darker-gray: rgb(59, 59, 59);
 $screen-bg: #008081;
 
-@mixin outset-border {
-	border: 2px solid;
-
-	border-top-color: $light-gray;
-	border-left-color: $light-gray;
-	border-right-color: $darker-gray;
-	border-bottom-color: $darker-gray;
-}
-
-@mixin inset-border {
-	border: 2px solid;
-
-	border-top-color: $darker-gray;
-	border-left-color: $darker-gray;
-	border-right-color: $light-gray;
-	border-bottom-color: $light-gray;
-}
-
-@mixin button {
-	@include outset-border;
-	outline: none;
-	background: $base-gray;
-
-	&:active {
-		@include inset-border;
-		position: relative;
-		top: 2px;
-		left: 2px;
-	}
+@font-face {
+	font-family: 'Windows 95';
+	src: url('/fonts/w-95-sans-serif.woff2') format('woff2'),
+		url('../fonts/w-95-sans-serif.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 
 * {
-	font-family: '95font';
+	font-family: 'Windows 95';
 	font-size: 12px;
 	box-sizing: border-box;
 	padding: 0;
@@ -52,6 +26,16 @@ $screen-bg: #008081;
 	color: white;
 	width: 100px;
 	text-align: center;
+	cursor: pointer;
+	position: absolute;
+
+	@include for_breakpoint(mobile) {
+		width: 80px;
+
+		span {
+			font-size: 0.9rem;
+		}
+	}
 
 	img {
 		width: 55%;
@@ -109,8 +93,6 @@ body {
 		padding: 2em 1.5em;
 		background: $screen-bg;
 		height: calc(100vh - 40px);
-		display: flex;
-		flex-direction: column;
 		row-gap: 25px;
 	}
 
