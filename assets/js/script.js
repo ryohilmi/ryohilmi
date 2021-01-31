@@ -2,6 +2,9 @@ const time = document.querySelector('#time');
 const apps = document.querySelectorAll('.app');
 const appsWindow = document.querySelectorAll('.window');
 
+let startPos;
+let endPos;
+
 setTime();
 positionApps();
 
@@ -10,7 +13,7 @@ setInterval(function () {
 }, 60 * 1000);
 
 apps.forEach(function (app) {
-	app.addEventListener('dblclick', openApp);
+	app.addEventListener('click', openApp);
 });
 
 appsWindow.forEach(function (appWindow) {
@@ -43,8 +46,11 @@ function dragElement(elmnt) {
 		e.preventDefault();
 		pos3 = e.clientX;
 		pos4 = e.clientY;
-		document.onmouseup = closeDragElement;
+
+		startPos = e.clientX || window.event.clientX;
+
 		document.onmousemove = elementDrag;
+		document.onmouseup = closeDragElement;
 	}
 
 	function elementDrag(e) {
@@ -58,13 +64,17 @@ function dragElement(elmnt) {
 		elmnt.style.left = elmnt.offsetLeft - pos1 + 'px';
 	}
 
-	function closeDragElement() {
+	function closeDragElement(e) {
+		endPos = e.clientX || window.event.clientX;
+
 		document.onmouseup = null;
 		document.onmousemove = null;
 	}
 }
 
 function openApp(e) {
+	if (startPos != endPos) return;
+
 	let app = e.target.localName != 'div' ? e.target.parentElement : e.target;
 	let target = app.getAttribute('data-target');
 	document.getElementById(target).classList.add('active');
