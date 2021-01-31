@@ -12,28 +12,33 @@
 	</head>
 	<body>
 		<div id="screen">
-			<div class="app">
-				<img src="/assets/images/bin.png" alt="Recycle bin" />
-				<span>Recycle Bin</span>
+			<div class="app" data-target="about-window">
+				<img src="/assets/images/about.png" alt="Recycle bin" />
+				<span>About Me</span>
 			</div>
 
-			<div class="app">
-				<img src="/assets/images/bin.png" alt="Recycle bin" />
-				<span>Recycle Bin</span>
+			<div class="app" data-target="skills-window">
+				<img src="/assets/images/skills.png" alt="Recycle bin" />
+				<span>Skills</span>
 			</div>
 
-			<div class="app">
-				<img src="/assets/images/bin.png" alt="Recycle bin" />
-				<span>Recycle Bin</span>
+			<div class="app" data-target="education-window">
+				<img src="/assets/images/education.png" alt="Recycle bin" />
+				<span>Education</span>
 			</div>
 
-			<div class="app">
-				<img src="/assets/images/bin.png" alt="Recycle bin" />
-				<span>Recycle Bin</span>
+			<div class="app" data-target="portfolio-window">
+				<img src="/assets/images/portfolio.png" alt="Recycle bin" />
+				<span>Portfolio</span>
 			</div>
 
-			<div class="window" id="welcome">
-				<div class="header" id="welcome-header">
+			<div class="app" data-target="contact-window">
+				<img src="/assets/images/contacts.png" alt="Recycle bin" />
+				<span>Contact</span>
+			</div>
+
+			<div class="window active" id="welcome">
+				<div class="header">
 					<span>Welcome :)</span>
 					<button class="close">
 						X
@@ -43,7 +48,58 @@
 					Site under construction
 				</div>
 			</div>
+
+			<div class="window" id="about-window">
+				<div class="header">
+					<span>About Me</span>
+					<button class="close">
+						X
+					</button>
+				</div>
+				<div class="content"></div>
+			</div>
+
+			<div class="window" id="skills-window">
+				<div class="header">
+					<span>Skills</span>
+					<button class="close">
+						X
+					</button>
+				</div>
+				<div class="content"></div>
+			</div>
+
+			<div class="window" id="education-window">
+				<div class="header">
+					<span>Education</span>
+					<button class="close">
+						X
+					</button>
+				</div>
+				<div class="content"></div>
+			</div>
+
+			<div class="window" id="portfolio-window">
+				<div class="header">
+					<span>Portfolio</span>
+					<button class="close">
+						X
+					</button>
+				</div>
+				<div class="content"></div>
+			</div>
 		</div>
+
+		<div class="window" id="contact-window">
+			<div class="header">
+				<span>Contact</span>
+				<button class="close">
+					X
+				</button>
+			</div>
+			<div class="content"></div>
+		</div>
+
 		<div id="taskbar">
 			<button id="start-btn">
 				Start
