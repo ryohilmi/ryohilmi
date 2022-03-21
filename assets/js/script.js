@@ -4,6 +4,7 @@ const appsWindow = document.querySelectorAll(".window");
 
 let startPos;
 let endPos;
+let windowIndexes = {};
 
 setTime();
 positionApps();
@@ -16,10 +17,14 @@ apps.forEach(function (app) {
   app.addEventListener("click", openApp);
 });
 
-appsWindow.forEach(function (appWindow) {
+appsWindow.forEach(function (appWindow, i) {
   dragElement(appWindow);
 
+  appWindow.style.zIndex = i + 2;
+  windowIndexes[i + 2] = appWindow.id;
+
   appWindow.querySelector("button").addEventListener("click", closeWindow);
+  appWindow.addEventListener("mousedown", (e) => setWindowZIndex(e, appWindow));
 });
 
 function setTime() {
@@ -30,14 +35,28 @@ function setTime() {
   });
 }
 
+function setWindowZIndex(e, appWindow) {
+  let windowCount = appsWindow.length;
+
+  for (let i = appWindow.style.zIndex; i < windowCount + 1; i++) {
+    windowIndexes[i] = windowIndexes[parseInt(i) + 1];
+    document.querySelector(`#${windowIndexes[i]}`).style.zIndex = i;
+  }
+
+  appWindow.style.zIndex = windowCount + 1;
+  windowIndexes[windowCount + 1] = appWindow.id;
+}
+
 function dragElement(elmnt) {
-  var pos1 = 0,
+  let pos1 = 0,
     pos2 = 0,
     pos3 = 0,
     pos4 = 0;
-  if (elmnt.querySelector(".header")) {
-    elmnt.querySelector(".header").onmousedown = dragMouseDown;
-    elmnt.querySelector(".header").ontouchstart = dragTouch;
+  let windowHeader = elmnt.querySelector(".header");
+
+  if (windowHeader) {
+    windowHeader.onmousedown = dragMouseDown;
+    windowHeader.ontouchstart = dragTouch;
   } else {
     elmnt.onmousedown = dragMouseDown;
     elmnt.ontouchstart = dragTouch;
@@ -46,6 +65,7 @@ function dragElement(elmnt) {
   function dragMouseDown(e) {
     e = e || window.event;
     e.preventDefault();
+
     pos3 = e.clientX;
     pos4 = e.clientY;
 
