@@ -23,7 +23,8 @@ appsWindow.forEach(function (appWindow, i) {
   appWindow.style.zIndex = i + 2;
   windowIndexes[i + 2] = appWindow.id;
 
-  appWindow.querySelector("button").addEventListener("click", closeWindow);
+  appWindow.querySelector(".fullscreen").addEventListener("click", fullscreen);
+  appWindow.querySelector(".close").addEventListener("click", closeWindow);
   appWindow.addEventListener("mousedown", (e) => setWindowZIndex(e, appWindow));
 });
 
@@ -86,6 +87,8 @@ function dragElement(elmnt) {
   }
 
   function mouseElementDrag(e) {
+    if (elmnt.classList.contains("fullscreen")) return;
+
     e = e || window.event;
     e.preventDefault();
     pos1 = pos3 - e.clientX;
@@ -97,6 +100,8 @@ function dragElement(elmnt) {
   }
 
   function touchElementDrag(e) {
+    if (elmnt.classList.contains("fullscreen")) return;
+
     pos1 = pos3 - e.touches[0].clientX;
     pos2 = pos4 - e.touches[0].clientY;
     pos3 = e.touches[0].clientX;
@@ -140,4 +145,8 @@ function positionApps() {
 
 function closeWindow(e) {
   e.target.closest(".window").classList.remove("active");
+}
+
+function fullscreen(e) {
+  e.target.closest(".window").classList.toggle("fullscreen");
 }
