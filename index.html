@@ -8,6 +8,13 @@
         />
         <title>----</title>
         <link rel="stylesheet" href="./assets/scss/style.scss" />
+        <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcomponents-loader.min.js"></script>
+
+        <!-- Load the element definition -->
+        <script
+            type="module"
+            src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"
+        ></script>
         <script type="module" src="./assets/js/script.js" defer></script>
     </head>
     <body>
@@ -42,7 +49,15 @@
                     <span>Welcome :)</span>
                     <button class="close">X</button>
                 </div>
+<<<<<<< Updated upstream
                 <div class="content">Site under construction</div>
+=======
+                <div class="content">
+                    <zero-md src="/assets/markdown/welcome.md"> </zero-md>
+                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                </div>
+>>>>>>> Stashed changes
             </div>
 
             <div class="window" id="about-window">
