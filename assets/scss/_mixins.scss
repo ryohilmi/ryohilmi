@@ -1,0 +1,30 @@
+@mixin outset-border {
+  border: 2px solid;
+
+  border-top-color: $light-gray;
+  border-left-color: $light-gray;
+  border-right-color: $darker-gray;
+  border-bottom-color: $darker-gray;
+}
+
+@mixin inset-border {
+  border: 2px solid;
+
+  border-top-color: $darker-gray;
+  border-left-color: $darker-gray;
+  border-right-color: $light-gray;
+  border-bottom-color: $light-gray;
+}
+
+@mixin button {
+  @include outset-border;
+  outline: none;
+  background: $base-gray;
+
+  &:active {
+    @include inset-border;
+    position: relative;
+    top: 2px;
+    left: 2px;
+  }
+}
