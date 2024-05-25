@@ -6,6 +6,9 @@ let startPos;
 let endPos;
 let windowIndexes = {};
 
+const MIN_WINDOW_WIDTH = 250;
+const MIN_WINDOW_HEIGHT = 150;
+
 setTime();
 positionApps();
 
@@ -19,6 +22,7 @@ apps.forEach(function (app) {
 
 appsWindow.forEach(function (appWindow, i) {
   dragElement(appWindow);
+  resizeElement(appWindow);
 
   appWindow.style.zIndex = i + 2;
   windowIndexes[i + 2] = appWindow.id;
@@ -108,6 +112,100 @@ function dragElement(elmnt) {
     pos4 = e.touches[0].clientY;
     elmnt.style.top = elmnt.offsetTop - pos2 + "px";
     elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+  }
+
+  function mouseCloseDragElement(e) {
+    endPos = e.clientX || window.event.clientX;
+
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+
+  function touchCloseDragElement(e) {
+    endPos = e.clientX || window.event.clientX;
+
+    document.ontouchend = null;
+    document.ontouchmove = null;
+  }
+}
+
+function resizeElement(elmnt) {
+  let pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+
+  let resizer = elmnt.querySelector(".resizer");
+
+  if (resizer) {
+    resizer.onmousedown = dragMouseDown;
+    resizer.ontouchstart = dragTouch;
+  } else {
+    return;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+
+    startPos = e.clientX || window.event.clientX;
+
+    document.onmousemove = mouseElementDrag;
+    document.onmouseup = mouseCloseDragElement;
+  }
+
+  function dragTouch(e) {
+    pos3 = e.touches[0].clientX;
+    pos4 = e.touches[0].clientY;
+
+    startPos = e.clientX || window.event.clientX;
+
+    document.ontouchmove = touchElementDrag;
+    document.ontouchend = touchCloseDragElement;
+  }
+
+  function mouseElementDrag(e) {
+    if (elmnt.classList.contains("fullscreen")) return;
+
+    e = e || window.event;
+    e.preventDefault();
+
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+
+    if (
+      elmnt.offsetHeight - pos2 < MIN_WINDOW_HEIGHT ||
+      elmnt.offsetWidth - pos1 < MIN_WINDOW_WIDTH
+    ) {
+      return;
+    }
+
+    elmnt.style.height = elmnt.offsetHeight - pos2 + "px";
+    elmnt.style.width = elmnt.offsetWidth - pos1 + "px";
+  }
+
+  function touchElementDrag(e) {
+    if (elmnt.classList.contains("fullscreen")) return;
+
+    pos1 = pos3 - e.touches[0].clientX;
+    pos2 = pos4 - e.touches[0].clientY;
+    pos3 = e.touches[0].clientX;
+    pos4 = e.touches[0].clientY;
+
+    if (
+      elmnt.offsetHeight - pos2 < MIN_WINDOW_HEIGHT ||
+      elmnt.offsetWidth - pos1 < MIN_WINDOW_WIDTH
+    ) {
+      return;
+    }
+
+    elmnt.style.height = elmnt.offsetHeight - pos2 + "px";
+    elmnt.style.width = elmnt.offsetWidth - pos1 + "px";
   }
 
   function mouseCloseDragElement(e) {
