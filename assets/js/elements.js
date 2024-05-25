@@ -1,27 +1,27 @@
 export const appElements = [
   {
     name: "About Me",
-    image: "/assets/images/about.png",
+    image: "/images/about.png",
     target: "about-window",
   },
   {
     name: "Skills",
-    image: "/assets/images/skills.png",
+    image: "/images/skills.png",
     target: "skills-window",
   },
   {
     name: "Education",
-    image: "/assets/images/education.png",
+    image: "/images/education.png",
     target: "education-window",
   },
   {
     name: "Portfolio",
-    image: "/assets/images/portfolio.png",
+    image: "/images/portfolio.png",
     target: "portfolio-window",
   },
   {
     name: "Contact",
-    image: "/assets/images/contacts.png",
+    image: "/images/contacts.png",
     target: "contact-window",
   },
 ];
