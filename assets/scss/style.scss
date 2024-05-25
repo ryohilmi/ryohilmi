@@ -16,8 +16,6 @@ $screen-bg: #008081;
 }
 
 * {
-  font-family: "Windows 95";
-  font-size: 12px;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -88,6 +86,8 @@ $screen-bg: #008081;
     .fullscreen {
       @include outset-border;
       @include button;
+      font-family: "Windows 95";
+      font-size: 12px;
       font-weight: bold;
       padding: 1px 6px;
       margin-left: 8px;
@@ -98,12 +98,13 @@ $screen-bg: #008081;
     @include inset-border;
     height: 100%;
     margin: 5px 5px 16px 5px;
-    padding: 0.5rem;
+    padding: 1.5rem 1rem;
     background: white;
     overflow-y: scroll;
 
-    zero-md {
-      padding: 1rem;
+    md-block {
+      // padding: 1rem; 
+      font-family: 'Arial', sans-serif
     }
   }
 }
@@ -111,6 +112,8 @@ $screen-bg: #008081;
 body {
   overflow: hidden;
   user-select: none;
+  font-family: "Windows 95";
+  font-size: 12px;
 
   #screen {
     padding: 2em 1.5em;
