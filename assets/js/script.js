@@ -1,3 +1,17 @@
+import {
+  appElements,
+  windowElements,
+  renderApp,
+  renderWindow,
+} from "./elements";
+
+const desktop = document.getElementById("screen");
+appElements.forEach((app) => desktop.appendChild(renderApp(app)));
+windowElements.forEach((window) => desktop.appendChild(renderWindow(window)));
+
+const MIN_WINDOW_WIDTH = 400;
+const MIN_WINDOW_HEIGHT = 170;
+
 const time = document.querySelector("#time");
 const apps = document.querySelectorAll(".app");
 const appsWindow = document.querySelectorAll(".window");
@@ -5,9 +19,6 @@ const appsWindow = document.querySelectorAll(".window");
 let startPos;
 let endPos;
 let windowIndexes = {};
-
-const MIN_WINDOW_WIDTH = 250;
-const MIN_WINDOW_HEIGHT = 150;
 
 setTime();
 positionApps();
