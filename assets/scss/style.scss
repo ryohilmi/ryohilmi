@@ -56,6 +56,7 @@ $screen-bg: #008081;
   flex-direction: column;
   width: 500px;
   height: 190px;
+  transition: all 0.1s ease-in-out;
 
   &.active {
     display: flex;
@@ -66,6 +67,7 @@ $screen-bg: #008081;
     left: 0 !important;
     width: 100% !important;
     height: calc(100vh - 40px) !important; 
+    transition: all 0.2s ease-in-out;
   }
 
   .header {

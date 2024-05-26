@@ -69,6 +69,7 @@ function dragElement(elmnt) {
     pos3 = 0,
     pos4 = 0;
   let windowHeader = elmnt.querySelector(".header");
+  let transition = elmnt.style.transition;
 
   if (windowHeader) {
     windowHeader.onmousedown = dragMouseDown;
@@ -88,6 +89,7 @@ function dragElement(elmnt) {
     startPos = e.clientX || window.event.clientX;
 
     elmnt.style.willChange = "top, left";
+    elmnt.style.transition = "none";
 
     document.onmousemove = mouseElementDrag;
     document.onmouseup = mouseCloseDragElement;
@@ -100,6 +102,7 @@ function dragElement(elmnt) {
     startPos = e.clientX || window.event.clientX;
 
     elmnt.style.willChange = "top, left";
+    elmnt.style.transition = "none";
 
     document.ontouchmove = touchElementDrag;
     document.ontouchend = touchCloseDragElement;
@@ -133,6 +136,7 @@ function dragElement(elmnt) {
     endPos = e.clientX || window.event.clientX;
 
     elmnt.style.willChange = "auto";
+    elmnt.style.transition = transition;
 
     document.onmouseup = null;
     document.onmousemove = null;
@@ -142,6 +146,7 @@ function dragElement(elmnt) {
     endPos = e.clientX || window.event.clientX;
 
     elmnt.style.willChange = "auto";
+    elmnt.style.transition = transition;
 
     document.ontouchend = null;
     document.ontouchmove = null;
@@ -155,6 +160,7 @@ function resizeElement(elmnt) {
     pos4 = 0;
 
   let resizer = elmnt.querySelector(".resizer");
+  let transition = elmnt.style.transition;
 
   if (resizer) {
     resizer.onmousedown = dragMouseDown;
@@ -170,6 +176,8 @@ function resizeElement(elmnt) {
     pos3 = e.clientX;
     pos4 = e.clientY;
 
+    elmnt.style.transition = "none";
+
     startPos = e.clientX || window.event.clientX;
 
     document.onmousemove = mouseElementDrag;
@@ -179,6 +187,8 @@ function resizeElement(elmnt) {
   function dragTouch(e) {
     pos3 = e.touches[0].clientX;
     pos4 = e.touches[0].clientY;
+
+    elmnt.style.transition = "none";
 
     startPos = e.clientX || window.event.clientX;
 
@@ -232,6 +242,8 @@ function resizeElement(elmnt) {
 
     document.onmouseup = null;
     document.onmousemove = null;
+
+    elmnt.style.transition = transition;
   }
 
   function touchCloseDragElement(e) {
@@ -239,6 +251,8 @@ function resizeElement(elmnt) {
 
     document.ontouchend = null;
     document.ontouchmove = null;
+
+    elmnt.style.transition = transition;
   }
 }
 
