@@ -87,6 +87,8 @@ function dragElement(elmnt) {
 
     startPos = e.clientX || window.event.clientX;
 
+    elmnt.style.willChange = "top, left";
+
     document.onmousemove = mouseElementDrag;
     document.onmouseup = mouseCloseDragElement;
   }
@@ -96,6 +98,8 @@ function dragElement(elmnt) {
     pos4 = e.touches[0].clientY;
 
     startPos = e.clientX || window.event.clientX;
+
+    elmnt.style.willChange = "top, left";
 
     document.ontouchmove = touchElementDrag;
     document.ontouchend = touchCloseDragElement;
@@ -128,12 +132,16 @@ function dragElement(elmnt) {
   function mouseCloseDragElement(e) {
     endPos = e.clientX || window.event.clientX;
 
+    elmnt.style.willChange = "auto";
+
     document.onmouseup = null;
     document.onmousemove = null;
   }
 
   function touchCloseDragElement(e) {
     endPos = e.clientX || window.event.clientX;
+
+    elmnt.style.willChange = "auto";
 
     document.ontouchend = null;
     document.ontouchmove = null;
